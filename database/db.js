@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 /*
 Database connection file
 using moongose
@@ -14,15 +15,16 @@ using moongose
  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'
 */
 
-import mongoose from "mongoose";
 const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect('mongodb+srv://root:toor@teachershub.ge8be.mongodb.net/', {
-        });
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`Error: ${error.message}`);
-        process.exit(1);
-    }
-    }
-    export default connectDB;
+  try {
+    await mongoose.connect('mongodb+srv://root:toor@teachershub.ge8be.mongodb.net/?retryWrites=true&w=majority&appName=teachershub', {
+
+    });
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1);
+  }
+};
+
+export default connectDB;
