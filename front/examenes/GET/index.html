@@ -4,38 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exámenes</title>
-    <style>
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 16px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .card h2 {
-            margin-top: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <header>
+    <header class="bg-primary text-white text-center py-3">
         <h1>Exámenes</h1>
         <hr>
     </header>
     <nav>
-        enlaces
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item"><a class="nav-link" href="../../Tareas/GET/index.html">Tareas</a></li>
+            <li class="nav-item"><a class="nav-link" href="../../Apuntes/GET/index.html">Apuntes</a></li>
+            <li class="nav-item"><a class="nav-link active" href="../../Examenes/GET/index.html">Exámenes</a></li>
+        </ul>
     </nav>
-    <main>
-        <form id="form">
-            <input type="date" id="fecha" placeholder="Fecha">
-            <input type="text" id="asignatura" placeholder="Asignatura">
-            <input type="text" id="temas" placeholder="Temas">
-            <button type="submit" id="send">Enviar</button>
+    <main class="container mt-4">
+        <form id="form" class="mb-4">
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" id="fecha" class="form-control" placeholder="Fecha">
+            </div>
+            <div class="mb-3">
+                <label for="asignatura" class="form-label">Asignatura</label>
+                <input type="text" id="asignatura" class="form-control" placeholder="Asignatura">
+            </div>
+            <div class="mb-3">
+                <label for="temas" class="form-label">Temas</label>
+                <input type="text" id="temas" class="form-control" placeholder="Temas">
+            </div>
+            <button type="submit" id="send" class="btn btn-primary">Enviar</button>
         </form>
         <!-- div para mostrar datos -->
         <div id="examenesDiv"></div>
     </main>
     <!-- js -->
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const getExamenes = async () => {
             const res = await fetch('http://localhost:444/api/examenes');
@@ -45,10 +48,12 @@
             examenesDiv.innerHTML = ''; // Limpiar el contenido anterior
             data.forEach(element => {
                 const { Fecha, Asignatura, Temas } = element;
-                examenesDiv.innerHTML += `<div class="card">
-                    <h2>${Asignatura}</h2>
-                    <p><strong>Fecha:</strong> ${Fecha}</p>
-                    <p><strong>Temas:</strong> ${Temas}</p>
+                examenesDiv.innerHTML += `<div class="card mb-3">
+                    <div class="card-body">
+                        <h2 class="card-title">${Asignatura}</h2>
+                        <p class="card-text"><strong>Fecha:</strong> ${Fecha}</p>
+                        <p class="card-text"><strong>Temas:</strong> ${Temas}</p>
+                    </div>
                 </div>`;
             });
         }
