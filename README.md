@@ -1,8 +1,9 @@
 # TeacherHub Database
 ## Api **Node** ***Mongodb***
-## Todo:
+ Todo:
 -bbdd [x]
--Forms  [ ]
+-Forms  [x]
+-PUT,DELETE
 
 ## Tabla: Apuntes
 
@@ -32,5 +33,45 @@
 | FechaLimite  | DATE          | Fecha límite para completar la tarea |
 | DatosInteres | TEXT          | Datos adicionales de interés         |
 
+## Guía de Uso
+
+### Requisitos Previos
+
+- Node.js
+- MongoDB
+
+### Instalación
+
+1. Clona el repositorio:
+    ```sh
+    git clone https://github.com/tu-usuario/teacherhub-database.git
+    ```
+2. Navega al directorio del proyecto:
+    ```sh
+    cd teacherhub-database
+    ```
+3. Instala las dependencias:
+    ```sh
+    npm install
+    ```
+
+### Configuración
+
+1. Crea un archivo `.env` en la raíz del proyecto y añade las siguientes variables de entorno:
+    ```env
+    PORT=444
+    MONGODB_URI=mongodb://localhost:27017/teacherhub
+    ```
+
+### Ejecución
+
+1. Inicia el servidor:
+    ```sh
+    node app.js
+    ```
+
+### Consumo de la API
+
+1. Abre el archivo `index.html` en tu navegador para consumir la API con el front-end.
 
 @unaiccz
