@@ -1,0 +1,43 @@
+<!-- html y js para obtener los apuntes -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apuntes</title>
+ </head>
+ <body>
+    <header>
+        <h1>Apuntes</h1>
+        
+    </header>
+    <nav>
+        enlaces
+    </nav>
+
+    <main>
+        <!-- div para mostrar datos -->
+         <div id="apuntes"></div>
+    </main>
+    <!-- js -->
+     <script>
+// funcion asincrona con fetch para obtener apuntes
+const getApuntes = async () => {
+    const res = await fetch('http://localhost:444/api/apuntes');
+    const data = await res.json();
+    console.log(data);
+    const apuntes = document.getElementById('apuntes');
+    //_id: '675aa994cb65862545c11a0b', Asignatura: 'es', Tema: '1-4', Apuntes: 'phpphpphp'
+    data.forEach(element => {
+        const {Asignatura, Tema, Apuntes} = element;
+        apuntes.innerHTML += `<h2>${Asignatura}</h2>
+        <p>${Tema}</p>
+        <p>${Apuntes}</p>
+        <hr>`;
+    });
+}
+getApuntes();
+
+     </script>
+ </body>
+ </html>
