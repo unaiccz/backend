@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tareas</h1>
+        <hr>
+    </header>
+    <nav>
+        enlaces
+    </nav>
+    <main>
+        <form id="form">
+            <input type="text" id="asignatura" placeholder="Asignatura">
+            <input type="text" id="tareas" placeholder="Tareas">
+            <input type="date" id="fechaLimite" placeholder="Fecha Límite">
+            <input type="text" id="datosInteres" placeholder="Datos de Interés">
+            <button type="submit" id="send">Enviar</button>
+        </form>
+        <!-- div para mostrar datos -->
+        <div id="tareasDiv"></div>
+    </main>
+    <!-- js -->
+    <script>
+        const getTareas = async () => {
+            const res = await fetch('http://localhost:444/api/tareas');
+            const data = await res.json();
+            console.log(data);
+            const tareasDiv = document.getElementById('tareasDiv');
+            tareasDiv.innerHTML = ''; // Limpiar el contenido anterior
+            data.forEach(element => {
+                const { Asignatura, Tareas, FechaLimite, DatosInteres } = element;
+                tareasDiv.innerHTML += `<div class="card">
+                    <h2>${Asignatura}</h2>
+                    <p><strong>Tareas:</strong> ${Tareas}</p>
+                    <p><strong>Fecha Límite:</strong> ${FechaLimite}</p>
+                    <p><strong>Datos de Interés:</strong> ${DatosInteres}</p>
+                </div>`;
+            });
+        }
+
+        const sendTareas = async (e) => {
+            e.preventDefault();
+            const asignatura = document.getElementById('asignatura').value;
+            const tareas = document.getElementById('tareas').value;
+            const fechaLimite = document.getElementById('fechaLimite').value;
+            const datosInteres = document.getElementById('datosInteres').value;
+            const data = {
+                Asignatura: asignatura,
+                Tareas: tareas,
+                FechaLimite: fechaLimite,
+                DatosInteres: datosInteres
+            }
+            const res = await fetch('http://localhost:444/api/tareas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const json = await res.json();
+            console.log(json);
+            getTareas();
+        }
+
+        document.getElementById('form').addEventListener('submit', sendTareas);
+        getTareas();
+    </script>
+</body>
+</html>
