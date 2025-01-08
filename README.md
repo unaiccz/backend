@@ -3,7 +3,9 @@
 ### Todo:
 - [x] bbdd
 - [x] Forms
-- [ ] PUT, DELETE
+- [ ] Delete
+- [ ] path
+- [ ] leer mas...
 
 ## Tabla: Apuntes
 
