@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exámenes</title>
-    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- icono -->
     <link rel="icon" href="../../img/examen.png" type="image/x-icon">
+    <style>
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .card.dark-mode {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
     <header class="bg-primary text-white text-center py-3">
         <h1>Exámenes</h1> <img src="../../img/examen.png" alt="Exámenes" width="50px">
         <hr>
+        <button id="theme-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
     </header>
     <nav>
         <ul class="nav nav-pills justify-content-center">
@@ -48,7 +59,7 @@
         <div id="examenesDiv"></div>
     </main>
     <!-- js -->
-    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
         const getExamenes = async () => {
             const res = await fetch('http://localhost:444/api/examenes');
@@ -58,13 +69,16 @@
             examenesDiv.innerHTML = ''; // Limpiar el contenido anterior
             data.forEach(element => {
                 const { Fecha, Asignatura, Temas } = element;
-                examenesDiv.innerHTML += `<div class="card mb-3">
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+                card.innerHTML = `
                     <div class="card-body">
                         <h2 class="card-title">${Asignatura}</h2>
                         <p class="card-text"><strong>Fecha:</strong> ${Fecha}</p>
                         <p class="card-text"><strong>Temas:</strong> ${Temas}</p>
                     </div>
-                </div>`;
+                `;
+                examenesDiv.appendChild(card);
             });
         }
 
@@ -92,6 +106,15 @@
 
         document.getElementById('form').addEventListener('submit', sendExamenes);
         getExamenes();
+
+        // Toggle dark mode
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.toggle('dark-mode');
+            });
+        });
     </script>
 </body>
 </html>

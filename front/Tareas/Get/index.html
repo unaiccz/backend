@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- icono -->
     <link rel="icon" href="../../img/tarea.png" type="image/x-icon">
+    <style>
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .card.dark-mode {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
     <header class="bg-primary text-white text-center py-3">
         <h1>Tareas</h1> <img src="../../img/tarea.png" alt="Tareas" width="50px">
         <hr>
+        <button id="theme-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
     </header>
     <nav>
         <ul class="nav nav-pills justify-content-center">
@@ -52,7 +63,7 @@
         <div id="tareasDiv"></div>
     </main>
     <!-- js -->
-    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
         const getTareas = async () => {
             const res = await fetch('http://localhost:444/api/tareas');
@@ -62,14 +73,17 @@
             tareasDiv.innerHTML = ''; // Limpiar el contenido anterior
             data.forEach(element => {
                 const { Asignatura, Tareas, FechaLimite, DatosInteres } = element;
-                tareasDiv.innerHTML += `<div class="card mb-3">
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+                card.innerHTML = `
                     <div class="card-body">
                         <h2 class="card-title">${Asignatura}</h2>
                         <p class="card-text"><strong>Tareas:</strong> ${Tareas}</p>
                         <p class="card-text"><strong>Fecha Límite:</strong> ${FechaLimite}</p>
                         <p class="card-text"><strong>Datos de Interés:</strong> ${DatosInteres}</p>
                     </div>
-                </div>`;
+                `;
+                tareasDiv.appendChild(card);
             });
         }
 
@@ -99,6 +113,15 @@
 
         document.getElementById('form').addEventListener('submit', sendTareas);
         getTareas();
+
+        // Toggle dark mode
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.toggle('dark-mode');
+            });
+        });
     </script>
 </body>
 </html>
