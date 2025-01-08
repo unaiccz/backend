@@ -103,8 +103,8 @@
         // Check local storage for theme
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            header.classList.add('dark-mode');
-            footer.classList.add('dark-mode');
+            header.classList.add('bg-dark');
+            footer.classList.add('bg-dark');
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.add('dark-mode');
             });
