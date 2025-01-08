@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <header class="bg-primary text-white text-center py-3">
+    <header class="bg-primary text-white text-center py-4" id="header">
         <h1>Apuntes</h1> <img src="../../img/Apuntes.png" alt="Apuntes" width="50px">
         <hr>
         <button id="theme-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
@@ -61,7 +61,7 @@
         <!-- div para mostrar datos -->
         <div id="apuntes"></div>
     </main>
-    <footer class="bg-primary text-white text-center py-3 mt-4">
+    <footer class="bg-primary text-white text-center py-3 mt-4" id="footer">
         <p>&copy; 2025 Teacher's Hub. All rights reserved.</p>
     </footer>
     <!-- js -->
@@ -114,8 +114,12 @@
         getApuntes();
 
         // Toggle dark mode
+        const header = document.getElementById('header');
+        const footer = document.getElementById('footer');
         const themeToggle = document.getElementById('theme-toggle');
         themeToggle.addEventListener('click', () => {
+            header.classList.toggle('bg-dark');
+            footer.classList.toggle('bg-dark');
             document.body.classList.toggle('dark-mode');
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.toggle('dark-mode');

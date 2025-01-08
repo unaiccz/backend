@@ -29,19 +29,19 @@
             color: #ffffff;
         }
         footer {
-            position: relative;
+            position: absolute;
             bottom: 0;
             width: 100%;
         }
     </style>
 </head>
 <body>
-    <header class="bg-primary text-white text-center py-3" id="header">
+    <header class="bg-primary text-white text-center py-4" id="header">
         <h1>Sobre nosotr@s</h1>
         <hr>
         <button id="theme-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
         <a href="../../about/about.html">
-            <img src="../../img/about.png" alt="About Us" width="50px" class="float-left ml-5">
+            <img src="../img/about.png" alt="About Us" width="50px" class="float-left ml-5">
         </a>
     </header>
     <nav>
@@ -80,9 +80,15 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-md-12">
+             <div class="col-md-12">
                 <h2>Contacto</h2>
-                <p>976 85 40 20 - iestauste@educa.aragon.es</p>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Información de Contacto</h5>
+                        <p class="card-text"><strong>Teléfono:</strong> 976 85 40 20</p>
+                        <p class="card-text"><strong>Email:</strong> <a href="mailto:iestauste@educa.aragon.es">iestauste@educa.aragon.es</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
