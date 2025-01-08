@@ -1,9 +1,9 @@
 # TeacherHub Database
 ## Api **Node** ***Mongodb***
- Todo:
--bbdd [x]
--Forms  [x]
--PUT,DELETE
+### Todo:
+- [x] bbdd
+- [x] Forms
+- [ ] PUT, DELETE
 
 ## Tabla: Apuntes
 
@@ -73,5 +73,9 @@
 ### Consumo de la API
 
 1. Abre el archivo `index.html` en tu navegador para consumir la API con el front-end.
+
+### Ver más
+
+Para más información, consulta la [documentación completa](https://github.com/tu-usuario/teacherhub-database/wiki).
 
 @unaiccz
