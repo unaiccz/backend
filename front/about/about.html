@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Hub-About Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- icono -->
+    <link rel="icon" href="../../img/about.png" type="image/x-icon">
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .card.dark-mode {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>About Us</h1>
+        <hr>
+        <button id="theme-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
+        <a href="../../about/about.html">
+            <img src="../img/about.png" alt="About Us" width="50px" class="float-left ml-5">
+        </a>
+    </header>
+    <nav>
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item"><a class="nav-link" href="../Tareas/Get/index.html">Tareas</a></li>
+            <li class="nav-item"><a class="nav-link" href="../Apuntes/Get/index.html">Apuntes</a></li>
+            <li class="nav-item"><a class="nav-link" href="../examenes/GET/index.html">Exámenes</a></li>
+        </ul>
+    </nav>
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Our Mission</h2>
+                <p>Our mission is to provide the best services to our customers. We strive to achieve excellence in every aspect of our business.</p>
+            </div>
+            <div class="col-md-6">
+                <h2>Our Team</h2>
+                <p>We have a dedicated team of professionals who are committed to delivering high-quality services. Our team is our greatest asset.</p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h2>Contact Us</h2>
+                <p>If you have any questions or need further information, please feel free to contact us. We are here to help you.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-primary text-white text-center py-3 mt-4">
+        <p>&copy; 2025 Teacher's Hub. All rights reserved.</p>
+    </footer>
+    <!-- js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle dark mode
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.toggle('dark-mode');
+            });
+        });
+    </script>
+</body>
+</html>
