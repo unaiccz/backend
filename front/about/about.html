@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher's Hub-About Us</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- icono -->
     <link rel="icon" href="../../img/about.png" type="image/x-icon">
     <style>
-      .dark{
-        background-color: #121212;
-        color: #ffffff;
-      }
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
@@ -36,7 +33,7 @@
     </style>
 </head>
 <body>
-    <header class="bg-primary text-white text-center py-4" id="header">
+    <header class="bg-primary text-white text-center py-4 animate__animated animate__fadeInDown" id="header">
         <h1>Sobre nosotr@s</h1>
         <hr>
         <button id="theme-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
@@ -44,7 +41,7 @@
             <img src="../img/about.png" alt="About Us" width="50px" class="float-left ml-5">
         </a>
     </header>
-    <nav>
+    <nav class="animate__animated animate__fadeInDown">
         <ul class="nav nav-pills justify-content-center">
             <li class="nav-item"><a class="nav-link" href="../Tareas/Get/index.html">Tareas</a></li>
             <li class="nav-item"><a class="nav-link" href="../Apuntes/Get/index.html">Apuntes</a></li>
@@ -53,11 +50,11 @@
     </nav>
     <main class="container mt-4">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 animate__animated animate__fadeInLeft">
                 <h2>Nuestra misión</h2>
                 <p>Hemos desarrollado una aplicación para la gestión de las tareas diarias del profesorado, facilitando la organización y seguimiento de actividades académicas, mejorando así la eficiencia y productividad en el entorno educativo.</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 animate__animated animate__fadeInRight">
                 <h2>Nuestro equipo</h2>
                 <div class="card mb-3">
                     <div class="card-body">
@@ -80,7 +77,7 @@
             </div>
         </div>
         <div class="row mt-4">
-             <div class="col-md-12">
+            <div class="col-md-12 animate__animated animate__fadeInUp">
                 <h2>Contacto</h2>
                 <div class="card mb-3">
                     <div class="card-body">
@@ -92,7 +89,7 @@
             </div>
         </div>
     </main>
-    <footer class="bg-primary text-white text-center py-3 mt-4" id="footer">
+    <footer class="bg-primary text-white text-center py-3 mt-4 animate__animated animate__fadeInUp" id="footer">
         <p>&copy; 2025 Teacher's Hub. All rights reserved.</p>
     </footer>
     <!-- js -->
@@ -100,20 +97,39 @@
     <script>
         // Toggle dark mode
         const header = document.getElementById('header');
-const footer = document.getElementById('footer');
+        const footer = document.getElementById('footer');
         const themeToggle = document.getElementById('theme-toggle');
+
+        // Check local storage for theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            header.classList.add('dark-mode');
+            footer.classList.add('dark-mode');
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.add('dark-mode');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.add('dark-mode');
+            });
+        }
+
         themeToggle.addEventListener('click', () => {
-            header.classList.toggle('bg-dark');
-            footer.classList.toggle('bg-dark');
             document.body.classList.toggle('dark-mode');
+            header.classList.toggle('dark-mode');
+            footer.classList.toggle('dark-mode');
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.toggle('dark-mode');
             });
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.toggle('dark-mode');
             });
-            document.querySelector('header').classList.toggle('dark-mode');
-            document.querySelector('footer').classList.toggle('dark-mode');
+
+            // Save theme to local storage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
         });
     </script>
 </body>

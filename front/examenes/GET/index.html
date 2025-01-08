@@ -16,6 +16,14 @@
             background-color: #1e1e1e;
             color: #ffffff;
         }
+        .nav-pills .nav-link.dark-mode {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        header.dark-mode, footer.dark-mode {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -53,13 +61,13 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="temas" class="form-label">Temas</label>
-                <input type="text" id="temas" class="form-control" placeholder="Temas">
+                <label for="tema" class="form-label">Tema</label>
+                <input type="text" id="tema" class="form-control" placeholder="Tema">
             </div>
             <button type="submit" id="send" class="btn btn-primary">Enviar</button>
         </form>
         <!-- div para mostrar datos -->
-        <div id="examenesDiv"></div>
+        <div id="examenes"></div>
     </main>
     <footer class="bg-primary text-white text-center py-3 mt-4" id="footer">
         <p>&copy; 2025 Teacher's Hub. All rights reserved.</p>
@@ -71,32 +79,32 @@
             const res = await fetch('http://localhost:444/api/examenes');
             const data = await res.json();
             console.log(data);
-            const examenesDiv = document.getElementById('examenesDiv');
+            const examenesDiv = document.getElementById('examenes');
             examenesDiv.innerHTML = ''; // Limpiar el contenido anterior
             data.forEach(element => {
-                const { Fecha, Asignatura, Temas } = element;
+                const { Fecha, Asignatura, Tema } = element;
                 const card = document.createElement('div');
                 card.className = 'card mb-3';
                 card.innerHTML = `
                     <div class="card-body">
                         <h2 class="card-title">${Asignatura}</h2>
                         <p class="card-text"><strong>Fecha:</strong> ${Fecha}</p>
-                        <p class="card-text"><strong>Temas:</strong> ${Temas}</p>
+                        <p class="card-text"><strong>Tema:</strong> ${Tema}</p>
                     </div>
                 `;
                 examenesDiv.appendChild(card);
             });
         }
 
-        const sendExamenes = async (e) => {
+        const sendExamen = async (e) => {
             e.preventDefault();
             const fecha = document.getElementById('fecha').value;
             const asignatura = document.getElementById('asignatura').value;
-            const temas = document.getElementById('temas').value;
+            const tema = document.getElementById('tema').value;
             const data = {
                 Fecha: fecha,
                 Asignatura: asignatura,
-                Temas: temas
+                Tema: tema
             }
             const res = await fetch('http://localhost:444/api/examenes', {
                 method: 'POST',
@@ -110,21 +118,57 @@
             getExamenes();
         }
 
-        document.getElementById('form').addEventListener('submit', sendExamenes);
+        document.getElementById('form').addEventListener('submit', sendExamen);
         getExamenes();
 
         // Toggle dark mode
         const header = document.getElementById('header');
         const footer = document.getElementById('footer');
         const themeToggle = document.getElementById('theme-toggle');
+
+        // Check local storage for theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            header.classList.add('bg-dark');
+            footer.classList.add('bg-dark');
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.add('dark-mode');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.add('dark-mode');
+            });
+        }
+
         themeToggle.addEventListener('click', () => {
-            header.classList.toggle('bg-dark');
-            footer.classList.toggle('bg-dark');
             document.body.classList.toggle('dark-mode');
+            header.classList.toggle('dark-mode');
+            footer.classList.toggle('dark-mode');
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.toggle('dark-mode');
             });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('dark-mode');
+            });
+
+            // Save theme to local storage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
         });
+
+        // Ensure dark mode is applied to dynamically added cards
+        const observer = new MutationObserver(() => {
+            if (document.body.classList.contains('dark-mode')) {
+                document.querySelectorAll('.card').forEach(card => {
+                    card.classList.add('dark-mode');
+                });
+            }
+        });
+
+        observer.observe(document.getElementById('examenes'), { childList: true });
+
     </script>
 </body>
 </html>
