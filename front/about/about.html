@@ -8,11 +8,10 @@
     <!-- icono -->
     <link rel="icon" href="../../img/about.png" type="image/x-icon">
     <style>
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+      .dark{
+        background-color: #121212;
+        color: #ffffff;
+      }
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
@@ -21,15 +20,28 @@
             background-color: #1e1e1e;
             color: #ffffff;
         }
+        .nav-pills .nav-link.dark-mode {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        header.dark-mode, footer.dark-mode {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
-    <header class="bg-primary text-white text-center py-3">
-        <h1>About Us</h1>
+    <header class="bg-primary text-white text-center py-3" id="header">
+        <h1>Sobre nosotr@s</h1>
         <hr>
         <button id="theme-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
         <a href="../../about/about.html">
-            <img src="../img/about.png" alt="About Us" width="50px" class="float-left ml-5">
+            <img src="../../img/about.png" alt="About Us" width="50px" class="float-left ml-5">
         </a>
     </header>
     <nav>
@@ -42,34 +54,60 @@
     <main class="container mt-4">
         <div class="row">
             <div class="col-md-6">
-                <h2>Our Mission</h2>
-                <p>Our mission is to provide the best services to our customers. We strive to achieve excellence in every aspect of our business.</p>
+                <h2>Nuestra misión</h2>
+                <p>Hemos desarrollado una aplicación para la gestión de las tareas diarias del profesorado, facilitando la organización y seguimiento de actividades académicas, mejorando así la eficiencia y productividad en el entorno educativo.</p>
             </div>
             <div class="col-md-6">
-                <h2>Our Team</h2>
-                <p>We have a dedicated team of professionals who are committed to delivering high-quality services. Our team is our greatest asset.</p>
+                <h2>Nuestro equipo</h2>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Unaicompaired</h5>
+                        <p class="card-text">unaicompaired@iesrioarba.es</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Sergio Beamud</h5>
+                        <p class="card-text">sergiobeamud@iesrioarba.es</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Noe Beltran</h5>
+                        <p class="card-text">nbeltran@iesrioarba.es</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-md-12">
-                <h2>Contact Us</h2>
-                <p>If you have any questions or need further information, please feel free to contact us. We are here to help you.</p>
+                <h2>Contacto</h2>
+                <p>976 85 40 20 - iestauste@educa.aragon.es</p>
             </div>
         </div>
     </main>
-    <footer class="bg-primary text-white text-center py-3 mt-4">
+    <footer class="bg-primary text-white text-center py-3 mt-4" id="footer">
         <p>&copy; 2025 Teacher's Hub. All rights reserved.</p>
     </footer>
     <!-- js -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
         // Toggle dark mode
+        const header = document.getElementById('header');
+const footer = document.getElementById('footer');
         const themeToggle = document.getElementById('theme-toggle');
         themeToggle.addEventListener('click', () => {
+            header.classList.toggle('bg-dark');
+            footer.classList.toggle('bg-dark');
             document.body.classList.toggle('dark-mode');
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.toggle('dark-mode');
             });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('dark-mode');
+            });
+            document.querySelector('header').classList.toggle('dark-mode');
+            document.querySelector('footer').classList.toggle('dark-mode');
         });
     </script>
 </body>
