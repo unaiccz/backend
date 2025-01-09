@@ -115,8 +115,8 @@
 
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            header.classList.toggle('dark-mode');
-            footer.classList.toggle('dark-mode');
+            header.classList.toggle('bg-dark');
+            footer.classList.toggle('bg-dark');
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.toggle('dark-mode');
             });

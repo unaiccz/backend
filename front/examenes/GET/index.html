@@ -82,14 +82,14 @@
             const examenesDiv = document.getElementById('examenes');
             examenesDiv.innerHTML = ''; // Limpiar el contenido anterior
             data.forEach(element => {
-                const { Fecha, Asignatura, Tema } = element;
+                const { Fecha, Asignatura, Temas } = element;
                 const card = document.createElement('div');
                 card.className = 'card mb-3';
                 card.innerHTML = `
                     <div class="card-body">
                         <h2 class="card-title">${Asignatura}</h2>
                         <p class="card-text"><strong>Fecha:</strong> ${Fecha}</p>
-                        <p class="card-text"><strong>Tema:</strong> ${Tema}</p>
+                        <p class="card-text"><strong>Tema:</strong> ${Temas}</p>
                     </div>
                 `;
                 examenesDiv.appendChild(card);
@@ -97,15 +97,19 @@
         }
 
         const sendExamen = async (e) => {
+            console.log('Enviando examen');
+            
             e.preventDefault();
             const fecha = document.getElementById('fecha').value;
             const asignatura = document.getElementById('asignatura').value;
             const tema = document.getElementById('tema').value;
+
             const data = {
                 Fecha: fecha,
                 Asignatura: asignatura,
-                Tema: tema
+                Temas: tema
             }
+            document.getElementById('form').reset();
             const res = await fetch('http://localhost:444/api/examenes', {
                 method: 'POST',
                 headers: {
@@ -141,8 +145,8 @@
 
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            header.classList.toggle('dark-mode');
-            footer.classList.toggle('dark-mode');
+            header.classList.toggle('bg-dark');
+            footer.classList.toggle('bg-dark');
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.toggle('dark-mode');
             });
